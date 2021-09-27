@@ -394,61 +394,6 @@
           }
         }
       ]
-    },
-    {
-      "scope": "[concat('Microsoft.Storage/storageAccounts/', variables('dlsName'))]",
-      "type": "Microsoft.Authorization/roleAssignments",
-      "apiVersion": "2020-04-01-preview",
-      "name": "[guid(uniqueString(variables('dlsName')))]",
-      "location": "[variables('location')]",
-      "dependsOn": [
-        "[variables('workspaceName')]"
-      ],
-      "properties": {
-        "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
-        "principalId": "[reference(resourceId('Microsoft.Synapse/workspaces', variables('workspaceName')), '2019-06-01-preview', 'Full').identity.principalId]",
-        "principalType": "ServicePrincipal"
-      }
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
-      "name": "MSIRBACOnResourceGroup0",
-      "dependsOn": [
-        "logicAppResumeDeployment",
-        "logicAppPauseDeployment"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templatelink": {
-          "uri": "[uri(variables('_artifactsLocation'), concat('nestedtemplates/logicapproleassignments.json'))]"
-        },
-        "parameters": {
-          "logicAppName": {
-            "value": "[variables('logicApps')[0]]"
-          }
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
-      "name": "MSIRBACOnResourceGroup1",
-      "dependsOn": [
-        "logicAppResumeDeployment",
-        "logicAppPauseDeployment"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templatelink": {
-          "uri": "[uri(variables('_artifactsLocation'), concat('nestedtemplates/logicapproleassignments.json'))]"
-        },
-        "parameters": {
-          "logicAppName": {
-            "value": "[variables('logicApps')[1]]"
-          }
-        }
-      }
     }
   ]
 }
