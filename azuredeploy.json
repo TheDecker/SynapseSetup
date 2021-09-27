@@ -264,7 +264,7 @@
       "properties": {
         "nodeCount": 5,
         "nodeSizeFamily": "MemoryOptimized",
-        "nodeSize": "Medium",
+        "nodeSize": "Small",
         "autoScale": {
           "enabled": true,
           "minNodeCount": 3,
